@@ -1,19 +1,23 @@
-package com.jp.onlinelibrary.domain.entities;
+package com.jp.onlinelibrary.infrastructure.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Author {
+@Data
+@Table(name = "authors")
+public class AuthorEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -26,6 +30,6 @@ public class Author {
     private LocalDate birthDate;
 
     @ManyToMany(mappedBy = "authors")
-    private List<Book> books;
+    private Set<BookEntity> bookEntities;
 
 }

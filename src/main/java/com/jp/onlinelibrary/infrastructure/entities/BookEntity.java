@@ -1,4 +1,4 @@
-package com.jp.onlinelibrary.domain.entities;
+package com.jp.onlinelibrary.infrastructure.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Book {
+@Table(name = "books")
+public class BookEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -27,9 +28,10 @@ public class Book {
     @JoinTable(name = "book_author",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
-    private Set<Author> authors;
+    private Set<AuthorEntity> authors;
 
     private LocalDate publishedYear;
 
+    @Column(unique = true)
     private Long isbn;
 }

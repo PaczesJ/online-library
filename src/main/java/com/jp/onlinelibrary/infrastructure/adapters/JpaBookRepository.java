@@ -1,8 +1,9 @@
 package com.jp.onlinelibrary.infrastructure.adapters;
 
-import com.jp.onlinelibrary.application.ports.BookRepository;
-import com.jp.onlinelibrary.domain.entities.Book;
-import io.vavr.collection.List;
+import com.jp.onlinelibrary.domain.ports.BookRepository;
+import com.jp.onlinelibrary.infrastructure.entities.BookEntity;
+import io.vavr.collection.HashSet;
+import io.vavr.collection.Set;
 import io.vavr.control.Option;
 import org.springframework.stereotype.Repository;
 
@@ -14,24 +15,25 @@ public class JpaBookRepository implements BookRepository {
     public JpaBookRepository(JpaRepositoryAdapter adapter) {
         this.adapter = adapter;
     }
+
     @Override
-    public Option<Book> findByISBN(Long isbn) {
+    public Option<BookEntity> findByISBN(Long isbn) {
         return Option.of(adapter.find(isbn));
     }
 
     @Override
-    public List<Book> all() {
-        return null;
+    public Set<BookEntity> all() {
+        return HashSet.ofAll(adapter.findAll());
     }
 
     @Override
-    public void save(Book book) {
-        adapter.save(book);
+    public void save(BookEntity bookEntity) {
+        adapter.save(bookEntity);
 
     }
 
     @Override
-    public void delete(Book book) {
-        adapter.delete(book);
+    public void delete(BookEntity bookEntity) {
+        adapter.delete(bookEntity);
     }
 }

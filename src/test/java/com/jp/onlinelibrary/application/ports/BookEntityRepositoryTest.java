@@ -1,7 +1,8 @@
 package com.jp.onlinelibrary.application.ports;
 
-import com.jp.onlinelibrary.domain.entities.Author;
-import com.jp.onlinelibrary.domain.entities.Book;
+import com.jp.onlinelibrary.domain.ports.BookRepository;
+import com.jp.onlinelibrary.infrastructure.entities.AuthorEntity;
+import com.jp.onlinelibrary.infrastructure.entities.BookEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,7 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Component
-public abstract class BookRepositoryTest {
+public abstract class BookEntityRepositoryTest {
 
 
     private static final long ISBN = 9788375780659L;
@@ -21,26 +22,26 @@ public abstract class BookRepositoryTest {
     void createReadUpdateDelete() {
 
         // given
-        Author authorNo1 = Author.builder()
+        AuthorEntity authorEntityNo1 = AuthorEntity.builder()
                 .name("Andrzej")
                 .surname("Sapkowski")
                 .birthDate(LocalDate.of(1948, 6, 21))
-                .books(List.of())
+                .bookEntities(List.of())
                 .build();
 
-        Book bookNo1 = Book.builder()
+        BookEntity bookEntityNo1 = BookEntity.builder()
                 .title("The Witcher: Blood of Elves")
-                .authors(Set.of(authorNo1))
+                .authorEntities(Set.of(authorEntityNo1))
                 .publishedYear(LocalDate.of(1994, 1, 1))
                 .isbn(ISBN)
                 .build();
 
         // when
-        bookRepository().save(bookNo1);
+        bookRepository().save(bookEntityNo1);
 
         // then
-        Book book = bookRepository().findByISBN(ISBN).get();
-        assertThat(book.getTitle()).isEqualTo(bookNo1.getTitle());
+        BookEntity bookEntity = bookRepository().findByISBN(ISBN).get();
+        assertThat(bookEntity.getTitle()).isEqualTo(bookEntityNo1.getTitle());
     }
 
     @Test
