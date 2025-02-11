@@ -29,11 +29,10 @@ public class JpaBookRepository implements BookRepository {
     @Override
     public void save(BookEntity bookEntity) {
         adapter.save(bookEntity);
-
     }
 
     @Override
-    public void delete(BookEntity bookEntity) {
-        adapter.delete(bookEntity);
+    public void delete(Long isbn) {
+        adapter.delete(isbn);
     }
 }

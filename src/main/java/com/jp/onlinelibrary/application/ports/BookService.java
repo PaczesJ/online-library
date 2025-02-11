@@ -13,8 +13,6 @@ public interface BookService {
 
     Set<Book> allBooks();
 
-    void updateBook(Book book);
-
     void deleteBook(Long isbn);
 
 }

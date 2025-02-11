@@ -31,16 +31,9 @@ public class BookServiceImpl implements BookService {
     public Set<Book> allBooks() {
         return bookRepository.all().map(BookServiceImpl::toDomain);
     }
-
-    @Override
-    public void updateBook(Book book) {
-        BookEntity byISBN = bookRepository.findByISBN(book.getIsbn()).getOrElseThrow(() -> new RuntimeException("its not a book!"));
-
-    }
-
     @Override
     public void deleteBook(Long isbn) {
-
+        bookRepository.delete(isbn);
     }
 
     private static BookEntity toEntity(Book book) {

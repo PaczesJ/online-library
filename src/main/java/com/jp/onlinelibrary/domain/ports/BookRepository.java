@@ -13,6 +13,5 @@ public interface BookRepository {
 
     void save(BookEntity bookEntity);
 
-    void delete(BookEntity bookEntity);
-
+    void delete(Long isbn);
 }

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,7 +30,6 @@ class JpaBookEntityRepositoryTest {
 
         BookEntity bookEntityNo1 = BookEntity.builder()
                 .title("The Witcher: Blood of Elves")
-                .authorEntities(Set.of())
                 .publishedYear(LocalDate.of(1994, 1, 1))
                 .isbn(ISBN)
                 .build();
@@ -43,7 +41,8 @@ class JpaBookEntityRepositoryTest {
         BookEntity bookEntity = jpaBookRepository.findByISBN(ISBN).get();
         assertThat(bookEntity.getTitle()).isEqualTo(bookEntityNo1.getTitle());
 
-        jpaBookRepository.delete(bookEntity);
+        jpaBookRepository.delete(bookEntity.getIsbn());
+        // assert non-existence of entity / its proper deletion
     }
 
     @Test
