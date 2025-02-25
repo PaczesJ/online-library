@@ -1,5 +1,6 @@
 package com.jp.onlinelibrary.domain.model;
 
+import io.vavr.collection.HashSet;
 import io.vavr.collection.Set;
 import lombok.Builder;
 import lombok.Data;
@@ -15,9 +16,9 @@ public class Book {
 
     private String title;
 
-    private Set<Author> authors;
+    private HashSet<Author> authors;
 
     private LocalDate publishedYear;
 
-    private Long isbn;
+    private String isbn;
 }

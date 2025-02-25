@@ -1,17 +1,17 @@
 package com.jp.onlinelibrary.domain.ports;
 
-import com.jp.onlinelibrary.infrastructure.entities.BookEntity;
+import com.jp.onlinelibrary.domain.model.Book;
 import io.vavr.collection.Set;
 import io.vavr.control.Option;
 
 // port for db communication
 public interface BookRepository {
 
-    Option<BookEntity> findByISBN(Long isbn);
+    Option<Book> findByISBN(String isbn);
 
-    Set<BookEntity> all();
+    Set<Book> all();
 
-    void save(BookEntity bookEntity);
+    Book save(Book book);
 
-    void delete(Long isbn);
+    void delete(String isbn);
 }

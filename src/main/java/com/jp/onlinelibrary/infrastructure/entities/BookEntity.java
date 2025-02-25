@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -28,10 +29,10 @@ public class BookEntity {
     @JoinTable(name = "book_author",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
-    private Set<AuthorEntity> authors;
+    private Set<AuthorEntity> authors = new HashSet<>();
 
     private LocalDate publishedYear;
 
-    @Column(unique = true)
-    private Long isbn;
+    @Column(unique = true, length = 17)
+    private String isbn;
 }

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -30,6 +31,6 @@ public class AuthorEntity {
     private LocalDate birthDate;
 
     @ManyToMany(mappedBy = "authors")
-    private Set<BookEntity> bookEntities;
+    private Set<BookEntity> bookEntities = new HashSet<>();
 
 }
